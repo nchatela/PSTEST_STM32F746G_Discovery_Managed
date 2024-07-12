@@ -1,0 +1,10 @@
+{
+    "ProgrammerPath": "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe",
+    "GnuARMPath": "C:/ProgramData/MATLAB/SupportPackages/R2024a/3P.instrset/gnuarm-armcortex.instrset/win",
+    "STM32CubeF7Path": "C:/WORK/STM32CubeF7",
+    "ComPort": "COM4",
+    "ToolChainName": "GCC ARM Cortex M | STM32F746G",
+    "TargetConnectionName": "STLink V2 VCP - Host Process Connection",
+    "BoardName": "STM32F746G_Custom_Target"
+}
+

@@ -7,7 +7,7 @@ classdef STM32F746G_Discovery_ExecutionTool < target.ExecutionTool
     methods
         % Start executing the application on the target.
         function errFlag = startApplication(this)
-            csts = STM32F746G_Discovery_Preferences();
+            csts = STM32F746G_Discovery_Constant();
             binFullPath = char(this.Application);
 
             [~,name,ext] = fileparts(binFullPath);

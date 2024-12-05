@@ -3,7 +3,7 @@
 %   Copyright 2024 The MathWorks, Inc.
 
 try
-    prefs = STM32F746G_Discovery_Preferences();
+    prefs = STM32F746G_Discovery_Constant();
     %% 1: Toolchain
     target.remove("Toolchain", prefs.ToolChainName, 'IncludeAssociations', true);
     %% 2: Custom Target

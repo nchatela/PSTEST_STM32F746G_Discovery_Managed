@@ -4,7 +4,7 @@
 	
 function [connection, stm32F746gDiscoveryBoard] = STM32F746G_Discovery_BoardDefinition(varargin)
 
-prefs = STM32F746G_Discovery_Preferences();
+prefs = STM32F746G_Discovery_Constant();
 
 processor = target.create("Processor", ...
                             "Name", "STM32F746NGH6", ...
@@ -67,13 +67,7 @@ cubeF7Dir = prefs.STM32CubeF7Path;
 
 cubeF7HalDir = [cubeF7Dir, '/Drivers/STM32F7xx_HAL_Driver/Src'];
 baseSoftDir = [strrep(fileparts(mfilename('fullpath')), '\','/') '/src'];
-
-mainFunction = target.create("MainFunction", "Name", "Test Main");
-mainFunction.IncludeFiles = {'STM32F746G_Discovery_board.h'};
-mainFunction.InitializationCode = sprintf('initSTM32F746GDiscovery();\n');
-stm32F746gDiscoveryBoard.MainFunctions = mainFunction;
-
-mainFunction.BuildDependencies.SourceFiles = { ...
+comms.APIImplementations.BuildDependencies.SourceFiles = { ...
     [baseSoftDir, '/startup_stm32f746nghx.s'], ...
     [baseSoftDir, '/STM32F746G_Discovery_board.c'] ...
     [baseSoftDir, '/STM32F746G_Discovery_serial.c'] ...
@@ -92,7 +86,7 @@ mainFunction.BuildDependencies.SourceFiles = { ...
     [cubeF7HalDir, '/stm32f7xx_hal_tim.c'] ...
     [cubeF7HalDir, '/stm32f7xx_hal_uart.c'] ...
 };
-mainFunction.BuildDependencies.IncludePaths = ...
+comms.APIImplementations.BuildDependencies.IncludePaths = ...
 {
     [cubeF7Dir, '/Drivers/STM32F7xx_HAL_Driver/Inc'] ...
     [cubeF7Dir, '/Drivers/CMSIS/Device/ST/STM32F7xx/Include'], ...
@@ -100,11 +94,15 @@ mainFunction.BuildDependencies.IncludePaths = ...
     baseSoftDir
 };
 
-mainFunction.BuildDependencies.Defines = ...
+comms.APIImplementations.BuildDependencies.Defines = ...
 {
     'STM32F746xx', 'USE_HAL_DRIVER'
 };
 
+mainFunction = target.create("MainFunction", "Name", "Test Main");
+mainFunction.IncludeFiles = {'STM32F746G_Discovery_board.h'};
+mainFunction.InitializationCode = sprintf('initSTM32F746GDiscovery();\n');
+stm32F746gDiscoveryBoard.MainFunctions = mainFunction;
 
 stm32F746gDiscoveryBoard.CommunicationInterfaces = comms;
 
@@ -122,9 +120,7 @@ connection.Name = prefs.TargetConnectionName;
 connection.CommunicationChannel = target.create("RS232Channel");
 connection.CommunicationChannel.Name = "STLink V2 VCP - RS232Channel";
 connection.CommunicationChannel.BaudRate = 115200;
-if ~isempty(prefs.ComPort)
-    connection.ConnectionProperties = target.create("Port",PortNumber=prefs.ComPort);
-end
+connection.ConnectionProperties = target.create("Port",PortNumber=prefs.ComPort);
 connection.Target = stm32F746gDiscoveryBoard;
 
 

@@ -9,7 +9,7 @@ STM32F746G_Discovery_BoardDefinition();
 
 STM32F746G_Discovery_ToolchainDefinition();
 
-if savepath
+if savepath(fullfile(userpath, 'pathdef.m'))
     warning('Error while saving path!');
 end
 

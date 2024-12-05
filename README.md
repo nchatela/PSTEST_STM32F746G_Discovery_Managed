@@ -26,7 +26,7 @@ git clone --recursive https://github.com/STMicroelectronics/STM32CubeF7.git
 The target registration files contain some information that is specific to the end user. Make sure you adapt this information to your installations *before registering your target*. If you forget to make the changes before registering your target, you can unregister the target, make the changes, and re-register the target.
 
 1. Download the demo and extract into a folder `pstest_custom_target_tutorial`.
-2. Edit the paths in `STM32F746GPrefs.json` to point to your installation folders:
+2. Edit the paths in `pstestPreferences.json` to point to your installation folders:
 - `ProgrammerPath`: Enter the full path to the STM32Programmer executable, `STM32_Programmer_CLI.exe`.
 - `GnuARMPath`: Enter the full path to the GNU ARM compiler compiler installation. This folder is the one where you extracted the GNU ARM compiler files in the Prerequisites section. The folder contains subfolders such as `arm-none-eabi`, `bin`, `include`, `lib`, and `share`.
 - `STM32CubeF7Path`: Enter the full path to the STM32 Cube F7 Git repository cloned in the Prerequisites section.
